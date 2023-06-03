@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { updateTicket } from "../api/ticket";
 
 const useTicketUpdate=(fetchTickets)=>{
