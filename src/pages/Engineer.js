@@ -1,9 +1,40 @@
-import React from 'react'
+import Sidebar from '../components/Sidebar';
+import StatusDashboard from '../components/statusDashboard/statusDashboard';
+import useFetchTickets from '../hooks/useFetchTickets';
+import TicketsTable from '../components/TicketsTable/TicketsTable';
+import useTicketUpdate from '../hooks/useTicketUpdate';
+import TicketsUpdateModal from '../components/TicketsUpdateModal/TicketsUpdateModal';
+import constants from '../utils/constants';
 
-const Engineer = () => {
+function Engineer(){
+
+
+       const [ticketDetails, fetchTickets] =  useFetchTickets();
+        const {selectedCurrTicket, ticketUpdateModal , editTicket , closeTicketUpdateModal, updateTicketFn, onTicketUpdate} = useTicketUpdate(fetchTickets);
+
+
+
+
     return (
-        <div>Engineer</div>
-    )
+            <div className="row bg-light" >
+            <div className="col-1">
+            <Sidebar/>
+            </div>
+
+            <div className="col my-4">
+                <div className='container'>
+                   <StatusDashboard ticketDetails={ticketDetails} />
+                    <TicketsTable editTicket={editTicket} title={"TICKETS ASSIGNED TO YOU"}ticketDetails={ticketDetails}  />
+                  <TicketsUpdateModal selectedCurrTicket={selectedCurrTicket} onTicketUpdate={onTicketUpdate} ticketUpdateModal={ticketUpdateModal} closeTicketUpdateModal={closeTicketUpdateModal} updateTicketFn={updateTicketFn} />
+                </div>
+            </div>
+            <div>
+            </div>
+
+             </div>              
+    );
 }
 
-export default Engineer
+
+
+export default Engineer;
